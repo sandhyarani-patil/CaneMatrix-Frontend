@@ -100,8 +100,17 @@ export const FactoryRateAPI = {
 // ---------------------------------------------------------------------------
 export const TonnesSugarAPI = {
   create: (farmerCode, totalTonnes) => api.post('/tonnes-sugar/create', null, { params: { farmerCode, totalTonnes } }),
+  // 🌟 ही 'lift' मेथड इथे ॲड कर (बॅकएंडच्या /lift एंडपॉइंट प्रमाणे)
+  lift: (farmerCode, quantityLifted, liftDate) =>
+    api.post('/tonnes-sugar/lift', null, { params: { farmerCode, quantityLifted, liftDate } }),
   all: () => api.get('/tonnes-sugar/all'),
+  // 🌟 डिलीटसाठी लागणारी 'remove' मेथड देखील नसेल तर ती इथे टाकून घे:
+  remove: (id) =>
+    api.delete(`/tonnes-sugar/delete/${id}`),
   history: (farmerCode) => api.get('/tonnes-sugar/history', { params: { farmerCode } }),
+
+  // 🌟 ही मेथड असणे अत्यंत आवश्यक आहे:
+  //getByFarmerCode: (farmerCode) => api.get(`/tonnes-sugar/farmer/${farmerCode}`),
 }
 
 // ---------------------------------------------------------------------------
